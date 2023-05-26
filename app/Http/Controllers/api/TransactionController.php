@@ -18,32 +18,35 @@ class TransactionController extends Controller
     public function transfer(Request $request)
     {
 
-        $walletPayer = Wallet::find(auth()->user()->id)
-
-        // Verify if payer has enough amount to transfer
-        if (0.00 < $walletPayer->value <= $request->value) {
+        $walletPayer = Wallet::where('user_id', $request->payer_id)->get();
             
-            // Insert new Transaction
-            $walletPayer = Wallet::where('user_id', $request->payer);
+            // Insert new Transaction for payer
+            $walletPayer = Wallet::where('user_id', $request->payer_id)->get();
             $transferPayer = new Transaction;
             $transferPayer->value = $request->value;
-            $transferPayer->wallet_id = $walletPayer->id;
-            $transferPayer->user_id = $request->payer;
+            $transferPayer->wallet_id = $request->payer_id;
+            $transferPayer->type = "D";
             $transferPayer->save();
+
+            // Insert new Transaction for payee
+            $walletPayee = Wallet::where('user_id', $request->payee_id)->get();
+            $transferPayee = new Transaction;
+            $transferPayee->value = $request->value;
+            $transferPayee->wallet_id = $request->payee_id;
+            $transferPayee->type = "R";
+            $transferPayee->save();
 
             // Increase payee wallet
-            $walletPayee = Wallet::where('user_id', $request->payee);
-            $walletPayee->value = $walletPayee->values + $request->value;
-            $transferPayer->save();
+            //$walletPayee->value = $walletPayee->value + $request->value;
+            //$walletPayee->save();
+
+            // Decrease payer wallet
+            //$walletPayer->value = $walletPayer->value - $request->value;
+            //$walletPayer->save();
 
             return response()->json([
-                "message" => "Transaction successfuly done!"
+                "message" => "Transação realizada com sucesso!"
             ], 200);
-        } else {
-            return response()->json([
-                "message" => "You don't have enough amount in your wallet"
-            ], 404);
-
-        }
+        
     }
 }

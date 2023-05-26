@@ -25,3 +25,5 @@ Route::get('my-wallet', [WalletController::class, 'getWallet']);
 
 // Transfer amount from a wallet to another one (1-1)
 Route::post('transfer', [TransactionController::class, 'transfer']);
+
+require __DIR__.'/auth.php';
