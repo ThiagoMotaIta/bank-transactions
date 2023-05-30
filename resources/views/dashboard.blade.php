@@ -31,14 +31,14 @@
                                 <br/>
                                 <input type="number" id="transfer-value">
                             <br/><br/>
-                                <button class="btn btn-success" onclick="transferValidation()">Transferir Agora</button>
+                                <button class="btn btn-success" onclick="checkTransaction()">Transferir Agora</button>
                                 <button class="btn btn-secondary" onclick="cancelTransfer()">Desistir</button>
-                                <small id="validationError" style="display:none; color:red;"><div>Por favor, informe os dados Obrigatórios</div></small>
+                                <small id="validationError" style="display:none; color:red;"></small>
                         </div>
 
-                        <div class="alert alert-success" id="transfer-success-alert" style="display:none;">
-                            
-                        </div>
+                        <div class="alert text-success" id="transfer-success-alert" style="display:none;"></div>
+
+                        <div class="alert" id="load-transaction" style="display:none;"></div>
 
                     @endif
                 </div>

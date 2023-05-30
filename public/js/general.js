@@ -1,9 +1,5 @@
-function modalAddNew(){
-    $("#msnSystem").hide();
-    $('#addNew').modal('show');
-}
 
-
+// Start user wallet amount
 function getMyWallet(){
     $("#my-wallet-value").html("<span><i class='fa fa-spin fa-spinner fa-lg'></i></span>");
 
@@ -13,7 +9,6 @@ function getMyWallet(){
 
     data: {
             "user_id":$('#logged-id').val(),
-            "_token": $('#csrf-token')[0].content,
         },
 
     dataType: 'json',
@@ -47,6 +42,7 @@ function getMyWallet(){
 
 }
 
+// Hide-show transaction DIV
 function transferOptions(){
     $("#transfer-options").show(500);
 }
@@ -55,7 +51,34 @@ function cancelTransfer(){
     $("#transfer-options").hide(500);   
 }
 
-// Transfer Money
+// Check the mock API before call transaction function
+function checkTransaction(){
+    $("#load-transaction").html("<br/><span><i class='fa fa-spin fa-spinner fa-lg'></i> <br/><small>Aguarde... Estamos finalizando a sua Transferência :D</small></span>");
+    $("#load-transaction").show();
+    $.ajax({
+    url : 'https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6',
+    type : 'GET',
+
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+
+        if (data.message == "Autorizado"){
+            transferValidation();   
+        } else {
+            $("#validationError").html("Por favor, informe os dados Obrigatórios");
+            $("#validationError").show(500);
+        }
+
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr.status);
+        console.log(thrownError);
+    }
+    });    
+}
+
+// Transfer Money Validation
 function transferValidation(){
 
     var validado = true;
@@ -82,10 +105,8 @@ function transferValidation(){
         success: function(data){
             console.log(data);
 
-            $("#transfer-success-alert").html(data.message);
-            $("#transfer-options").hide(500);
-            $("#transfer-success-alert").show(500);
-            getMyWallet();
+            // Send Notify if transaction gone well
+            sendNotify();
 
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -95,4 +116,34 @@ function transferValidation(){
         });
     }
 
+}
+
+
+// Notify payee user after transaction successfuly sent
+function sendNotify(){
+    $.ajax({
+    url : 'http://o4d9z.mocklab.io/notify',
+    type : 'GET',
+
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+
+        if (data.message == "Success"){
+            $("#load-transaction").hide(500);
+            $("#transfer-success-alert").html("<i class='fa fa-check'></i> Transferência realizada com sucesso!");
+            $("#transfer-options").hide(500);
+            $("#transfer-success-alert").show(500);
+            getMyWallet();
+        } else {
+            $("#validationError").html("Transferência realizada, mas a notificação ainda não foi enviada.");
+            $("#validationError").show(500);
+        }
+
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr.status);
+        console.log(thrownError);
+    }
+    });
 }
