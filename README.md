@@ -13,4 +13,4 @@ A sample API bank transaction built using Laravel Framework (version 9.52) on PH
 
 ## API Doc
 
-Please, check this link out: <a href="[https://packagist.org/packages/laravel/framework](https://github.com/ThiagoMotaIta/bank-transactions/blob/main/public/Documenta%C3%A7%C3%A3o%20da%20API%20NP%20Bank.pdf)">[API NP Bank]</a>.
+Please, check this link out: <a href="https://packagist.org/packages/laravel/framework](https://github.com/ThiagoMotaIta/bank-transactions/blob/main/public/Documenta%C3%A7%C3%A3o%20da%20API%20NP%20Bank.pdf">[API NP Bank]</a>.
