@@ -7,10 +7,10 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Priject
+## About Project
 
 A sample API bank transaction built using Laravel Framework (version 9.52) on PHP: 8.0.11 and MySQL database 
 
 ## API Doc
 
-Please, check this link bellow [API NP Bank]([https://opensource.org/licenses/MIT](https://github.com/ThiagoMotaIta/bank-transactions/blob/main/public/Documenta%C3%A7%C3%A3o%20da%20API%20NP%20Bank.pdf)).
+Please, check this link out: <a href="[https://packagist.org/packages/laravel/framework](https://github.com/ThiagoMotaIta/bank-transactions/blob/main/public/Documenta%C3%A7%C3%A3o%20da%20API%20NP%20Bank.pdf)">[API NP Bank]</a>.
