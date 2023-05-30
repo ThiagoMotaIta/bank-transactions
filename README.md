@@ -9,7 +9,8 @@
 
 ## About Project
 
-A sample API bank transaction built using Laravel Framework (version 9.52) on PHP: 8.0.11 and MySQL database 
+A sample API bank transaction built using Laravel Framework (version 9.52) on PHP: 8.0.11 and MySQL database.
+<br/>Author: Thiago Mota.
 
 ## API Doc
 
